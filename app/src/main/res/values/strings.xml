@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AppVideo</string>
+    <string name="film_nav">Фильмы</string>
+    <string name="favorites_nav">Избранные</string>
+    <string name="description_title">Описание</string>
+    <string name="app_movie_film">Фильм добавлен в избранное</string>
+    <string name="delete_movie_film">Фильм удален из избранного</string>
+    <string name="Undo">Отмена</string>
 </resources>
