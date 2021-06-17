@@ -1,12 +1,11 @@
 package com.android.appvideo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.android.appvideo.ui.main.DetailFragment
-import com.android.appvideo.ui.main.MainFragment
-import com.android.appvideo.ui.main.OnFilmClickListener
+import com.android.appvideo.ui.main.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), OnFilmClickListener {
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity(), OnFilmClickListener {
                 }
                 R.id.nav_favorite -> {
                     Toast.makeText(this, "Избраное", Toast.LENGTH_SHORT).show()
-                    loadFragment(MainFragment())
+                    loadFragment(FavoriteFragment())
                 }
             }
             true
@@ -42,6 +41,7 @@ class MainActivity : AppCompatActivity(), OnFilmClickListener {
             .commit()
     }
 
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return false
@@ -53,5 +53,10 @@ class MainActivity : AppCompatActivity(), OnFilmClickListener {
             .replace(R.id.fragment_placeholder, DetailFragment.newInstance(itemId))
             .addToBackStack("")
             .commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.navigate_bottom, menu)
+        return true
     }
 }

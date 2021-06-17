@@ -39,7 +39,7 @@ class DetailFragment : Fragment() {
         filmId = arguments?.getInt(FILM_ID_EXTRA) ?: 0
         with(FilmRepository.filmConstructor[filmId]) {
             view.findViewById<TextView>(R.id.film_name).text = this.name
-            view.findViewById<TextView>(R.id.descr).text = this.description
+            view.findViewById<TextView>(R.id.descr).text = this.descriptionDetail
 
             initToolbar(this.name, this.imageID)
         }

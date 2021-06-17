@@ -6,4 +6,5 @@
     <string name="app_movie_film">Фильм добавлен в избранное</string>
     <string name="delete_movie_film">Фильм удален из избранного</string>
     <string name="Undo">Отмена</string>
+    <string name="navigate_favorites">Избранные</string>
 </resources>
