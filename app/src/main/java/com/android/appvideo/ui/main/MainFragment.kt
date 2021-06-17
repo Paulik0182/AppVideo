@@ -24,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar
 class MainFragment : Fragment() {
 
 var clickListener: OnFilmClickListener? = null
-    private lateinit var RECYCLER: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,7 +64,7 @@ var clickListener: OnFilmClickListener? = null
     private fun initRecyclerView(view: View) {
         if (view is RecyclerView) {
             with(view) {
-                RECYCLER = this
+                Companion.RECYCLER = this
                 layoutManager =
                     if (activity?.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
                         LinearLayoutManager(context)
@@ -102,5 +101,10 @@ var clickListener: OnFilmClickListener? = null
                 addItemDecoration(filmDecoration)
             }
         }
+    }
+
+    companion object {
+        @JvmField
+        var RECYCLER: RecyclerView? = null
     }
 }

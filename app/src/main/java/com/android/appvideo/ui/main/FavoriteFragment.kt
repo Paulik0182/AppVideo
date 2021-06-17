@@ -20,9 +20,10 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import org.jetbrains.annotations.NotNull
 
 class FavoriteFragment : Fragment() {
-    private lateinit var RECYCLER : RecyclerView
+    @JvmField var RECYCLER: RecyclerView? = null
     var clickListener: OnFilmClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
