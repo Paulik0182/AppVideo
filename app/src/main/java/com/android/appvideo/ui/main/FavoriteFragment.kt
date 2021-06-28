@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,9 +17,7 @@ import com.android.appvideo.data.FilmConstructor
 import com.android.appvideo.data.FilmRepository
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import org.jetbrains.annotations.NotNull
 
 class FavoriteFragment : Fragment() {
     @JvmField var RECYCLER: RecyclerView? = null
@@ -50,7 +47,7 @@ class FavoriteFragment : Fragment() {
             ?.setDisplayHomeAsUpEnabled(true)
 
         requireActivity().findViewById<AppBarLayout>(R.id.appbar).setExpanded(false, false)
-        requireActivity().findViewById<CollapsingToolbarLayout>(R.id.main_collapsing).title = resources.getString(R.string.navigate_favorites)
+        requireActivity().findViewById<CollapsingToolbarLayout>(R.id.main_collapsing).title = resources.getString(R.string.favorites_nav)
         requireActivity().findViewById<ImageView>(R.id.expandedImage).apply{
             setImageResource(R.drawable.black_screen)
             adjustViewBounds = false

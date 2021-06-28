@@ -13,15 +13,15 @@ import com.android.appvideo.data.FilmRepository
 import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class DetailFragment : Fragment() {
-    companion object {
-        private const val FILM_ID_EXTRA = "FILM_ID_EXTRA"
-        fun newInstance(filmId: Int): DetailFragment {
-            val args = Bundle()
-            args.putInt(FILM_ID_EXTRA, filmId)
 
-            val newFragment = DetailFragment()
-            newFragment.arguments = args
-            return newFragment
+    companion object {
+        val BUNDLE_EXTRA= "FilmRepository"
+
+    private const val FILM_ID_EXTRA = "FILM_ID_EXTRA"
+        fun newInstance(Bundle: Bundle): DetailFragment {
+            val fragment = DetailFragment()
+            fragment.arguments = Bundle
+            return fragment
         }
     }
 
@@ -37,7 +37,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         filmId = arguments?.getInt(FILM_ID_EXTRA) ?: 0
-        with(FilmRepository.filmConstructor[filmId]) {
+        with(FilmRepository(filmId)) {
             view.findViewById<TextView>(R.id.film_name).text = this.name
             view.findViewById<TextView>(R.id.descr).text = this.descriptionDetail
 
@@ -57,4 +57,5 @@ class DetailFragment : Fragment() {
         }
         requireActivity().findViewById<CollapsingToolbarLayout>(R.id.main_collapsing).title = title
     }
+
 }

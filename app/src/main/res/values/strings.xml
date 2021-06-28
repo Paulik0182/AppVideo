@@ -6,5 +6,8 @@
     <string name="app_movie_film">Фильм добавлен в избранное</string>
     <string name="delete_movie_film">Фильм удален из избранного</string>
     <string name="Undo">Отмена</string>
-    <string name="navigate_favorites">Избранные</string>
+    <string name="fab_switch_description">Переключить язык</string>
+    <string name="action_settings">Настройки</string>
+    <string name="error">Ошибка!</string>
+    <string name="reload">Обновить</string>
 </resources>

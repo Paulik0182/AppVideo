@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppVideo</string>
+    <string name="film_nav">Films</string>
+    <string name="favorites_nav">Favorites</string>
+    <string name="description_title" translatable="false">Description</string>
+    <string name="app_movie_film">Film was added to favorites</string>
+    <string name="delete_movie_film">Film was removed from favorites</string>
+    <string name="Undo">Undo</string>
+    <string name="action_settings">Settings</string>
+    <string name="fab_switch_description">Switch Language</string>
+
+
+</resources>

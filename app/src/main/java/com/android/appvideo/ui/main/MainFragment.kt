@@ -20,8 +20,16 @@ import com.android.appvideo.data.FilmRepository
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
+import com.android.appvideo.databinding.MainFragmentBinding
+import kotlinx.android.synthetic.main.main_activity.*
 
+@Suppress("NAME_SHADOWING")
 class MainFragment : Fragment() {
+    private lateinit var binding: MainFragmentBinding
+    private var isDataSetRus: Boolean = true
+    private val viewModel: MainViewModel by viewModel
+
+    private var adapter: MainFragmentAdapter? = null
 
 var clickListener: OnFilmClickListener? = null
 
@@ -37,6 +45,9 @@ var clickListener: OnFilmClickListener? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initToolbar()
+        binding.list.setOnClickListener { changeWeatherDataSet() }
+        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
+        viewModel.getFilmRepositoryFromLocalSourceRus()
     }
 
     private fun initToolbar() {
@@ -106,5 +117,56 @@ var clickListener: OnFilmClickListener? = null
     companion object {
         @JvmField
         var RECYCLER: RecyclerView? = null
+    }
+
+    private fun changeWeatherDataSet() = with(binding) {
+        if (isDataSetRus) {
+            viewModel.getFilmRepositoryFromLocalSourceWorld()
+            mainFragmentFAB.setImageResource(R.drawable.ic_earth)
+        } else {
+            viewModel.getFilmRepositoryFromLocalSourceRus()
+            mainFragmentFAB.setImageResource(R.drawable.ic_russia)
+        }
+        isDataSetRus = !isDataSetRus
+    }
+    private fun renderData(appState: AppState) = with(binding) {
+        when (appState) {
+            is AppState.Success -> {
+                list.visibility = View.GONE
+                adapter = MainFragmentAdapter(object : OnItemViewClickListener {
+                    override fun onItemViewClick(FilmRepository1: FilmRepository) {
+                        val manager = activity?.supportFragmentManager
+                        manager?.let { manager ->
+                            val bundle = Bundle().apply {
+                                putParcelable(DetailFragment.BUNDLE_EXTRA, FilmRepository)
+                            }
+                            manager.beginTransaction()
+                                .add(R.id.list, DetailFragment.newInstance(bundle))
+                                .addToBackStack("")
+                                .commitAllowingStateLoss()
+                        }
+                    }
+                }
+                ).apply {
+                    setWeather(appState.FilmRepositoryData)
+                }
+                list.adapter = adapter
+            }
+            is AppState.Loading -> {
+                list.visibility = View.VISIBLE
+            }
+            is AppState.Error -> {
+                list.visibility = View.GONE
+
+                mainFragmentFAB.showSnackBar(
+                    getString(R.string.error),
+                    getString(R.string.reload),
+                    { viewModel.getFilmRepositoryFromLocalSourceRus() }
+                )
+            }
+        }
+    }
+    interface OnItemViewClickListener {
+        fun onItemViewClick(FilmRepository1: FilmRepository)
     }
 }
